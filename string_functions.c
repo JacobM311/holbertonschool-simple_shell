@@ -92,3 +92,42 @@ char *_strcpy(char *dest, char *src)
 	*dest = '\0';
 		return (temp);
 }
+
+/**
+  * _strdup - duplicates a string.
+  * @str: pointer to string
+  * Return: pointer to string
+  */
+
+char *_strdup(char *str)
+{
+	int i, n;
+
+	char *strcp;
+
+	if (!str)
+	{
+		return (NULL);
+	}
+
+	for (n = 0; str[n] != '\0';)
+	{
+		n++;
+	}
+
+	strcp = malloc(sizeof(char) * n + 1);
+
+	if (!strcp)
+	{
+		return (NULL);
+	}
+
+	for (i = 0; i < n; i++)
+	{
+		strcp[i] = str[i];
+	}
+
+	strcp[n] = str[n];
+
+	return (strcp);
+}
