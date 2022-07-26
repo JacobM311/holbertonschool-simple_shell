@@ -1,15 +1,6 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
+#include "main.h"
 
 char **av;
-
-char **make_av(char *);
-int execute(char **command);
-
 
 int main(void)
 {
@@ -50,7 +41,7 @@ int execute(char **command)
 	}
 	if (status == 0)
 	{
-		if (execve(command[0], command, NULL) = -1);
+		if (execve(command[0], command, NULL) == -1);
 		perror("Error");
 		return (-1);	
 	}
@@ -89,7 +80,3 @@ char **make_av(char *str)
 	av[i] = NULL;
 	return (av);
 }
-
-char **make_path(char  *str)
-{
-
