@@ -14,7 +14,7 @@ int main(void)
 
 		getline(&buffer, &size, stdin);
 
-		if (strcmp(buffer, "exit\n") == 0)
+		if (_strcmp(buffer, "exit\n") == 0)
 			break;
 		else
 		{
@@ -51,7 +51,7 @@ int execute(char **command)
 
 char **make_av(char *str)
 {
-	char *buffer = strdup(str);
+	char *buffer = _strdup(str);
 	char *argument;
 	char prev = '0';
 	int i = 0, numArgs = 0;
