@@ -14,5 +14,7 @@ int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
+char *_strdup(char *str);
+int _strncmp(char *s1, char *s2, int n);
 
 #endif/*MAIN_H*/
