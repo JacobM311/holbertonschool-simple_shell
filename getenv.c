@@ -2,11 +2,11 @@
 
 char *_getenv(const char *var)
 {
-	int i = 0, match, len = _strlen(var);
+	int i = 0, match, len = strlen(var);
 
 	while (environ[i])
 	{
-		match = _strncmp(environ[i], var, len);
+		match = strncmp(environ[i], var, len);
 		if (match == 0)
 			return (environ[i] + len + 1);
 		i++;
