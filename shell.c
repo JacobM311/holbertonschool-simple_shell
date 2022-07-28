@@ -79,13 +79,13 @@ char *_path(char *str)
 	int i = 0;
 	char *final_path;
 
-	exec = strcat("/", str);
+	exec = _strcat("/", str);
 	path = _getenv("PATH");
 	path_array = create_path(path);
 
 	while (path_array[i])
 	{
-		path_array[i] = strcat(path_array[i], exec);
+		path_array[i] = _strcat(path_array[i], exec);
 		i++;
 	}
 
@@ -104,7 +104,7 @@ char *_path(char *str)
 
 char **create_path(char *command)
 {
-	char *buffer = strdup(command);
+	char *buffer = _strdup(command);
 	char *argument;
 	int i = 0, elements = 0;
 
