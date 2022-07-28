@@ -2,12 +2,15 @@
 
 char **av;
 char **path_av;
-char **_path(char *exec);
+char *_path(char *str);
+char **create_path(char *command);
+char *_stat(char **var);
 
 int main(void)
 {
 	char *buffer = NULL;
 	char **command;
+	char *path_exec;
 	size_t size = 0;
 	int i = 0;
 
@@ -33,7 +36,11 @@ int main(void)
 		}
 		else
 		{
-			command = _path(buffer);
+			command = make_av(buffer);
+			path_exec = _path(command[0]);
+			if (execute(path_exec) == -1)
+				break;
+			
 		}
 	}
 	free(buffer);
@@ -92,62 +99,70 @@ char **make_av(char *str)
 	return (av);
 }
 
-char **_path(char *str)
+char *_path(char *str)
 {
 	char *exec;
 	char *path;
 	char **path_array;
 	int i = 0;
-	char *final path
+	char *final_path;
 
 	exec = strcat("/", str);
 	path = _getenv("PATH");
-	path_array = create_path
+	path_array = create_path(path);
 
-	while (buffer[i])
+	while (path_array[i])
 	{
-		if (buffer[i] == ' ' && prev != ' ')
-			numArgs++;
-		prev = buffer[i];
+		path_array[i] = strcat(path_array[i], exec);
 		i++;
 	}
 
-	av = malloc(sizeof(*av) * (numArgs + 2));
+	final_path = _stat(path_array);
+	if (final_path);
+	return (final_path);
 
-	argument = strtok(buffer, " \n");
-	av[0] = argument;
-	
-	i = 1;
-	while (argument != NULL)
-	{
-		argument = strtok(NULL, " \n");
-		av[i] = argument;
-		i++;
-	}
-
-	av[i] = NULL;
-	return (av);
+	return (NULL);
 }
 
 char **create_path(char *command)
 {
 	char *buffer = strdup(command);
 	char *argument;
-	int i = 0; numArgs = 0;
+	int i = 0, elements = 0;
 
-	while (buffer[1])
+	while (buffer[i])
 	{
 		if (buffer[i] == ':')
-			numArgs++;
+			elements++;
 		i++;
 	}
 
-	path_av = malloc(sizeof(*path_av) * (numArgs + 2));
+	path_av = malloc(sizeof(*path_av) * (elements + 2));
 
-	argument = strtok(buffer, ':');
+	argument = strtok(buffer, ":");
 	path_av[0] = argument;
 
 	i = 1;
 	while (argument != NULL)
 	{
+		argument = strtok(NULL, ":");
+		av[i] = argument;
+		i++;
+	}
+	return (path_av);
+}
 
+char *_stat(char **var)
+{
+	unsigned int i;
+	struct stat st;
+
+	i = 0;
+	while (var[i])
+	{
+		if (stat(var[i], &st) == 0)
+			return (var[i]);
+		i++;
+	}
+	return (NULL);
+}
