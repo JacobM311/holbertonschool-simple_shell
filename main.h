@@ -10,17 +10,25 @@
 #include <sys/wait.h>
 #include <stdarg.h>
 
+/*global variables*/
 extern char **environ;
+char **av;
+char **path_av;
 
+/*string functions*/
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
 int _strncmp(char *s1, char *s2, int n);
-char **make_av(char *);
-int execute(char **command);
 
+/*shell*/
+char **make_av(char *str);
+int execute(char **command);
+char *_path(char *str);
+char **create_path(char *command);
+char *_stat(char **var);
 
 /*printf*/
 int _printf(const char *format, ...);
@@ -34,6 +42,7 @@ int dec_print(int c);
 int int_len(int c);
 int _putchar(char c);
 
+/*structure*/
 typedef struct type
 {
 	char form_match;
