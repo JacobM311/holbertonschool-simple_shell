@@ -33,13 +33,13 @@ int main(void)
 					break;
 			}
 		}
-		else
+		/*else
 		{
 			command = make_av(buffer);
 			path_exec = _path(command[0]);
 			if (execute(path_exec) == -1)
 				break;
-		}
+		}*/
 	}
 	free(buffer);
 	free(av);
