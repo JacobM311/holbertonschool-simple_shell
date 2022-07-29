@@ -9,7 +9,6 @@ int main(void)
 {
 	char *buffer = NULL;
 	char **command;
-	char *path_exec;
 	size_t size = 0;
 	int i = 0;
 
@@ -33,13 +32,6 @@ int main(void)
 					break;
 			}
 		}
-		/*else
-		{
-			command = make_av(buffer);
-			path_exec = _path(command[0]);
-			if (execute(path_exec) == -1)
-				break;
-		}*/
 	}
 	free(buffer);
 	free(av);

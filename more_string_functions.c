@@ -8,32 +8,22 @@
   * Return: compared strings
   */
 
-int _strncmp(char s1[], char s2[], int n)
+int _strncmp(const char *s1, const char *s2, size_t n)
 {
-	int i;
+		int diff;
+	size_t i;
 
-	int strint1, strint2;
-
-	for (i = 0; i < n; i++)
+	diff = 0;
+	i = 0;
+	while (s1[i])
 	{
-		if (s1[i] == s2[i])
+		if (s1[i] != s2[i] || i == n - 1)
 		{
-			if (i == (n - 1))
-			{
-				return (0);
-			}
+			diff = s1[i] - s2[i];
+			break;
 		}
-
-		int strint1 = (int) s1[i];
-		int strint2 = (int) s2[i];
-
-		if (strint1 > strint2)
-		{
-			return (1);
-		}
-		if (strint2 > strint1)
-		{
-			return (-1);
-		}
+		i++;
 	}
+
+	return (diff);
 }

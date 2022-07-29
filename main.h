@@ -13,7 +13,6 @@
 /*global variables*/
 extern char **environ;
 char **av;
-char **path_av;
 
 /*string functions*/
 int _strlen(char *s);
@@ -21,7 +20,7 @@ char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
-int _strncmp(char *s1, char *s2, int n);
+int _strncmp(const char *s1,const char *s2, size_t n);
 
 /*shell*/
 char **make_av(char *str);
