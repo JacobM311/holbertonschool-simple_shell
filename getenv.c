@@ -6,7 +6,7 @@
   * Return: char
   */
 
-char *_getenv(const char *var)
+char *_getenv(char *var)
 {
 	int i = 0, match, len = _strlen(var);
 
