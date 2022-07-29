@@ -1,1 +1,53 @@
-# this is a man page. nice
+SIMPLE SHELL MANUAL PAGE
+
+NAME
+hsh - Simple Shell project for Holberton School
+
+SYNOPSIS
+$ [command] [arguments]
+
+DESCRIPTION
+hsh is a simple command line interpreter that reads commands from a command line and executes them.
+
+DIRECTIONS
+
+INTERACTIVE MODE
+
+To use the shell in interactive mode, use these instructions.
+
+Compile all .c files with these compilation options:
+
+$ gcc -Wall -Werror -Wextra -pedantic *.c -o hsh
+
+Then, run the executable by typing:
+
+./hsh
+
+The command prompt $ will appear and wait for the user command.
+
+NON INTERACTIVE MODE
+
+Follow the previous compilation instructions, but type this instead:
+
+echo "/bin/ls" | ./hsh
+
+BUILTINS
+ls
+Lists files in the current working directory.
+
+env
+Prints environmental variables.
+
+exit
+Terminates the hsh process.
+
+EXIT STATUS
+0 if no errors
+1 if error occurs
+
+BUGS
+None are known currently.
+
+AUTHORS
+Jacob Marshall
+Connor Hostler
