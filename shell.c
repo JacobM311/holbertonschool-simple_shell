@@ -71,7 +71,7 @@ char **make_av(char *str)
   * Return: char
   */
 
-char *_path(char *str)
+/*char *_path(char *str)
 {
 	char *exec;
 	char *path;
@@ -102,7 +102,7 @@ char *_path(char *str)
   * Return: char
   */
 
-char **create_path(char *command)
+/*char **create_path(char *command)
 {
 	char *buffer = _strdup(command);
 	char *argument;
@@ -136,7 +136,7 @@ char **create_path(char *command)
   * Return: char
   */
 
-char *_stat(char **var)
+/*char *_stat(char **var)
 {
 	unsigned int i;
 	struct stat st;
@@ -149,4 +149,4 @@ char *_stat(char **var)
 		i++;
 	}
 	return (NULL);
-}
+}*/
