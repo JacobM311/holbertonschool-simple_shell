@@ -8,6 +8,7 @@
 int main(void)
 {
 	char *buffer = NULL;
+	char **envp = environ;
 	size_t size = 0;
 	int i, status = EXIT_SUCCESS;
 
