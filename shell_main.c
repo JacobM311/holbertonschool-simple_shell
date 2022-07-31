@@ -8,32 +8,106 @@
 int main(void)
 {
 	char *buffer = NULL;
-	char **command;
 	size_t size = 0;
-	int i = 0;
+	int i, status = EXIT_SUCCESS;
 
 	while (1)
 	{
-		write(1, "$ ", 2);
-		getline(&buffer, &size, stdin);
-		if (buffer[0] == '/' || '.')
+		if (isatty(STDIN_FILENO))
+			write(1, "$ ", 2);
+		if (getline(&buffer, &size, stdin) == EOF)
+			break;
+		if (strcmp(buffer, "exit\n") == 0)
+			 break;
+		if (strcmp(buffer, "env\n") == 0)
+			printenv(status);
+		for (i = 0; buffer[i] != '\n'; i++)
 		{
-			if (_strcmp(buffer, "exit\n") == 0)
-				break;
-			if (_strcmp(buffer, "env\n") == 0)
-				for (i = 0; environ[i]; i++)
-				{
-					_printf("%s\n", environ[i]);
-				}
-			else
+			if (buffer[i] != ' ')
 			{
-				command = make_av(buffer);
-				if (execute(command) == -1)
-					break;
+				status = make_av(buffer, status);
+				break;
 			}
 		}
 	}
-	free(buffer);
-	free(av);
-	return (0);
+	if(buffer)
+		free(buffer);
+	return (status);
+}
+
+int make_av(char *buffer, int status)
+{
+	char *av[32], *argument, *command;
+	int i = 0;
+
+	/*create argument variables from buffer*/
+	argument = strtok(buffer, " \n");
+
+	for (i = 0; argument != NULL; i++)
+	{
+		av[i] = argument;
+		argument = strtok(NULL, " \n");
+	}
+	av[i] = NULL;
+
+	/*pass argument variable to function to concat path to file*/
+	command = create_path(av[0]);
+	if (strcmp(command, av[0]) != 0)
+	{
+		av[0] = command;
+	}
+	/*if file exists and is executable, it is passed to command to execute*/
+	status = execute(av, status);
+return (status);
+}
+
+char *create_path(char *file)
+{
+	char *command = NULL, *path, *temp, *path_tok;
+	struct stat st;
+
+	/*check to see if file path was given*/
+	if (stat(file, &st) == 0)
+	{
+		if (access(file, X_OK) == 0)
+			return (file);
+	}
+	/*get path then pass fisrt path token to loop to check if file path exists*/
+	path = _getenv("PATH");
+	path_tok = strtok(path, ":");
+	while (path_tok)
+	{
+		path_tok = strdup(path_tok);
+		temp = strcat(path_tok, "/");
+		command = strcat(temp, file);
+		if (stat(command, &st) == 0)
+		{
+			if (access(command, X_OK) == 0)
+			{
+				return (command);
+			}
+		}
+		path_tok = strtok(NULL, ":\n");
+	}
+	perror("Error");
+		return (NULL);
+	free(path);
+	return (command);
+}
+
+int execute(char **command, int status)
+{
+	pid_t check = fork();
+
+	if (check != 0)
+	{
+		wait(&status);
+		status = WEXITSTATUS(status);
+	}
+	if (check == 0)
+	{
+		if (execve(command[0], command, NULL) == -1)
+		perror("Error");
+	}
+	return (status);
 }

@@ -9,66 +9,33 @@
 
 char *_strcat(char *dest, char *src)
 {
-	int i = 0;
-	int n = 0;
+	int i, n, destSize = _strlen(dest), srcSize = _strlen(src);
+	char *newStr;
 
-	while (dest[i] != '\0')
+	if(dest == NULL)
+		dest = "";
+	if(src == NULL)
+		src = "";
+
+	newStr = malloc(sizeof(newStr)*(destSize + srcSize + 1));
+	if(newStr = NULL)
+		return (NULL);
+
+	for (i = 0; i < destSize; i++)
 	{
+		newStr[i] = dest[i];
+	}
+
+	for (n = 0; n < srcSize; n++)
+	{
+		newStr[i] = src[n];
 		i++;
 	}
 
-	while (src[n] != '\0')
-	{
-		dest[i] = src[n];
-		n++;
-		i++;
-	}
+	newStr[i] = '\0';
 
-	dest[i] = '\0';
+	return (newStr);
 
-	return (dest);
-
-}
-
-/**
-  * _strcmp - function that compares two strings.
-  * @s1: string 1
-  * @s2: string 2
-  * Return: strings compared
-  */
-
-int _strcmp(char *s1, char *s2)
-{
-	while (*s1 == *s2)
-	{
-		if (*s1 == '\0')
-		{
-			return (0);
-		}
-
-		s1++;
-		s2++;
-	}
-
-	return (*s1 - *s2);
-
-}
-
-/**
-  * _strlen - function that returns the length of a string.
-  * @s: string
-  * Return: string length
-  */
-
-int _strlen(char *s)
-{
-	int i = 0;
-
-	while (*s++)
-
-		i++;
-
-	return (i);
 }
 
 /**
@@ -122,7 +89,7 @@ char *_strdup(char *str)
 		return (NULL);
 	}
 
-	for (i = 0; i < n; i++)
+	for (i = 0; i != '\0'; i++)
 	{
 		strcp[i] = str[i];
 	}
@@ -130,4 +97,46 @@ char *_strdup(char *str)
 	strcp[n] = str[n];
 
 	return (strcp);
+}
+
+/**
+ * _strcmp - compares two strings
+ * @s1: first string
+ * @s2: second string
+ * Return: 0 if strings are equal, or difference if not equal.
+ */
+int _strcmp(const char *s1, const char *s2)
+{
+	int diff;
+	int i;
+
+	diff = 0;
+	i = 0;
+	while (s1[i])
+	{
+		if (s1[i] != s2[i])
+		{
+			diff = s1[i] - s2[i];
+			break;
+		}
+		i++;
+	}
+
+	return (diff);
+}
+
+/**
+ * _strlen - gets length of string
+ * @str: string
+ * Return: length of string
+ */
+
+int _strlen(const char *str)
+{
+	int i = 0;
+
+	while (str[i])
+		i++;
+
+	return (i);
 }

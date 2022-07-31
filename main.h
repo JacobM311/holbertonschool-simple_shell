@@ -8,28 +8,29 @@
 #include <unistd.h>
 #include <string.h>
 #include <sys/wait.h>
-#include <stdarg.h>
+#include <signal.h>
+#include <fcntl.h>
+#include <stddef.h>
 
 /*global variables*/
 extern char **environ;
-char **av;
 
 /*string functions*/
-int _strlen(char *s);
+int _strlen(const char *s);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
-int _strcmp(char *s1, char *s2);
+int _strcmp(const char *s1, const char *s2);
 char *_strdup(char *str);
-int _strncmp(const char *s1,const char *s2, size_t n);
+int _strncmp(const char *s1, const char *s2, size_t n);
 
 /*shell*/
-char **make_av(char *str);
-int execute(char **command);
-char *_path(char *str);
-char **create_path(char *command);
-char *_stat(char **var);
+int make_av(char *buffer, int status);
+int execute(char **command, int status);
+char *create_path(char *filename);
+char *_getenv(char *var);
+int printenv(int status);
 
-/*printf*/
+/*printf*//*
 int _printf(const char *format, ...);
 int (*get_func(char conv_spec))(va_list, int);
 int print_char(va_list ap, int count);
@@ -39,13 +40,6 @@ int _putchar(char c);
 int print_dec(va_list ap, int count);
 int dec_print(int c);
 int int_len(int c);
-int _putchar(char c);
-
-/*structure*/
-typedef struct type
-{
-	char form_match;
-	int (*func)(va_list, int);
-} type_t;
+int _putchar(char c);*/
 
 #endif/*MAIN_H*/
