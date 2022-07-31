@@ -20,7 +20,13 @@ int main(void)
 		if (strcmp(buffer, "exit\n") == 0)
 			 break;
 		if (strcmp(buffer, "env\n") == 0)
-			printenv(status);
+		{
+			for (i = 0; environ[i]; i++)
+			{
+				printf("%s\n", environ[i]);
+				continue;
+			}
+		}
 		for (i = 0; buffer[i] != '\n'; i++)
 		{
 			if (buffer[i] != ' ')

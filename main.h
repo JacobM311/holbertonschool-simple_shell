@@ -16,12 +16,12 @@
 extern char **environ;
 
 /*string functions*/
-int _strlen(const char *s);
+int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
-int _strcmp(const char *s1, const char *s2);
+int _strcmp(char *s1, char *s2);
 char *_strdup(char *str);
-int _strncmp(const char *s1, const char *s2, size_t n);
+int _strncmp(char *s1, char *s2, size_t n);
 
 /*shell*/
 int make_av(char *buffer, int status);
