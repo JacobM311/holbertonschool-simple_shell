@@ -1,5 +1,11 @@
 #include "main.h"
 
+/**
+  * _getenv - get environment
+  * @var: variable
+  * Return: NULL
+  */
+
 char *_getenv(char *var)
 {
 	int i, len = strlen(var);

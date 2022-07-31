@@ -41,6 +41,13 @@ int main(void)
 	return (status);
 }
 
+/**
+  * make_av - make array
+  * @buffer: buffer
+  * @status: status
+  * Return: int
+  */
+
 int make_av(char *buffer, int status)
 {
 	char *av[32], *argument, *command;
@@ -66,6 +73,12 @@ int make_av(char *buffer, int status)
 	status = execute(av, status);
 return (status);
 }
+
+/**
+  * create_path - create path
+  * @file: file
+  * Return: command
+  */
 
 char *create_path(char *file)
 {
@@ -100,6 +113,13 @@ char *create_path(char *file)
 	free(path);
 	return (command);
 }
+
+/**
+  * execute - execute command
+  * @command: command
+  * @status: status
+  * Return: status
+  */
 
 int execute(char **command, int status)
 {
