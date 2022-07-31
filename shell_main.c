@@ -21,9 +21,9 @@ int main(void)
 			 break;
 		if (strcmp(buffer, "env\n") == 0)
 		{
-			for (i = 0; environ[i]; i++)
+			for (i = 0; envp[i]; i++)
 			{
-				printf("%s\n", environ[i]);
+				printf("%s\n", envp[i]);
 				continue;
 			}
 		}
