@@ -23,10 +23,10 @@ int main(void)
 		if (strcmp(buffer, "env\n") == 0)
 		{
 			for (i = 0; envp[i]; i++)
-			{
 				printf("%s\n", envp[i]);
-				continue;
-			}
+		free(buffer);
+		buffer = NULL;
+		continue;
 		}
 		for (i = 0; buffer[i] != '\n'; i++)
 		{
